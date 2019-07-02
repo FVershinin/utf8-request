@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.1.1.RELEASE"
+    id("org.springframework.boot") version "2.2.0.M4"
     id("io.spring.dependency-management") version "1.0.7.RELEASE"
     kotlin("jvm") version "1.3.31"
     kotlin("plugin.spring") version "1.3.31"
@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

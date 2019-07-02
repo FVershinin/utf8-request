@@ -2,16 +2,30 @@ package com.example.utf8request
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.*
+import org.springframework.context.annotation.Bean
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.servlet.function.router
+import java.util.concurrent.CompletableFuture
 
 @RestController
 @SpringBootApplication
 class Application {
 
-    @RequestMapping("/graphql", method = [RequestMethod.GET], produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun request(@RequestParam query: String): String {
-        return query
+    @GetMapping("/annotation-request/")
+    fun request(): CompletableFuture<Int> = CompletableFuture.supplyAsync {
+        Thread.sleep(1000)
+        10
+    }
+
+    @Bean
+    fun functionalEndpoint() = router {
+        GET("/function-request/") {
+            ok().body(CompletableFuture.supplyAsync {
+                Thread.sleep(1000)
+                10
+            })
+        }
     }
 }
 
